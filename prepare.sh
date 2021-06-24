@@ -11,7 +11,7 @@ if [ -z "$3" ]; then config=GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.p
 if [ -z "$4" ]; then globaltag=FT_53_LV5_AN1; else globaltag=$4; fi
 if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$5; fi
 
-dbfile="$globaltag"_stripped.db
+dbfile="$globaltag".db
 
 # Set up area
 
@@ -23,7 +23,6 @@ mkdir $globaltag
 # Modify the config file, this does not yet change the global tag, must be changed by hand!
 
 sed -i 's/\/cvmfs\/cms-opendata-conddb.cern.ch\///g' $config
-sed -i "s/::All/_stripped::All/g" $config
 eventline=$(grep process.maxEvents $config)
 sed -i "s/$eventline/process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1) )/g" $config
 
@@ -36,7 +35,7 @@ sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
-echo Check the input file and the GlobalTag in $config
+echo Check the input file and the GlobalTag in $package/$config
 echo Take an input file of the correponding year
 echo e.g. root://eospublic.cern.ch//eos/opendata/cms/Run2011A/SingleElectron/AOD/12Oct2013-v1/10000/1045436C-1240-E311-851B-003048D2BF1C.root for 2011
 echo and root://eospublic.cern.ch//eos/opendata/cms/Run2012B/MuHad/AOD/22Jan2013-v1/20000/002AED1E-1C74-E211-AAA3-00237DA1AC2A.root for 2012
