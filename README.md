@@ -96,23 +96,23 @@ The file names are identical for the two years, but the files are not the same:
 2011:
 
 ```
- $ ls -l FT_53_LV5_AN1
+$ ls -l FT_53_LV5_AN1
 total 1908
--rw-r--r-- 1 cmsusr cmsusr 598016 Jun 24 15:24 L1GtPrescaleFactorsAlgoTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 266240 Jun 24 15:25 L1GtPrescaleFactorsTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  38912 Jun 24 15:24 L1GtStableParameters_CRAFT09_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 236544 Jun 24 15:26 L1GtTriggerMaskAlgoTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 219136 Jun 24 15:26 L1GtTriggerMaskTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  34816 Jun 24 15:27 L1GtTriggerMaskVetoAlgoTrig_CRAFT09_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 128000 Jun 24 15:27 L1GtTriggerMaskVetoTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 419840 Jun 24 15:28 L1GtTriggerMenu_CRAFT09_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr 598016 Jun 24 21:28 L1GtPrescaleFactorsAlgoTrig_CRAFT09v2_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr 266240 Jun 24 21:29 L1GtPrescaleFactorsTechTrig_CRAFT09v2_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr  38912 Jun 24 21:27 L1GtStableParameters_CRAFT09_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr 236544 Jun 24 21:30 L1GtTriggerMaskAlgoTrig_CRAFT09v2_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr 219136 Jun 24 21:31 L1GtTriggerMaskTechTrig_CRAFT09v2_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr  34816 Jun 24 21:31 L1GtTriggerMaskVetoAlgoTrig_CRAFT09_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr 128000 Jun 24 21:32 L1GtTriggerMaskVetoTechTrig_CRAFT09v2_hlt.db
+-rw-r--r-- 1 cmsusr cmsusr 419840 Jun 24 21:33 L1GtTriggerMenu_CRAFT09_hlt.db
 ```
 
 
 2012:
 
 ```
- $ ls -l FT53_V21A_AN6_FULL
+$ ls -l FT53_V21A_AN6_FULL
 total 4452
 -rw-r--r-- 1 cmsusr cmsusr 1369088 Jun 24 21:04 L1GtPrescaleFactorsAlgoTrig_CRAFT09v2_hlt.db
 -rw-r--r-- 1 cmsusr cmsusr  670720 Jun 24 21:05 L1GtPrescaleFactorsTechTrig_CRAFT09v2_hlt.db
