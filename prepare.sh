@@ -42,6 +42,6 @@ echo 2011: root://eospublic.cern.ch//eos/opendata/cms/Run2011A/SingleElectron/AO
 echo 2012: root://eospublic.cern.ch//eos/opendata/cms/Run2012B/MuHad/AOD/22Jan2013-v1/20000/002AED1E-1C74-E211-AAA3-00237DA1AC2A.root 
 echo or curl the already modified trigger configs
 echo 2011: curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py ">" $package/$config 
-echo 2012: curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py ">" $package/$config
+echo 2012: curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2012_cfg.py ">" $package/$config
 echo "=========================================================================================================================================="
 
