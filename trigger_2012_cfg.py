@@ -1,4 +1,4 @@
-mport FWCore.ParameterSet.Config as cms
+import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("TriggerInfo")
 
@@ -8,7 +8,7 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1) )
 
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-' root://eospublic.cern.ch//eos/opendata/cms/Run2012B/MuHad/AOD/22Jan2013-v1/20000/002AED1E-1C74-E211-AAA3-00237DA1AC2A.root'
+'root://eospublic.cern.ch//eos/opendata/cms/Run2012B/MuHad/AOD/22Jan2013-v1/20000/002AED1E-1C74-E211-AAA3-00237DA1AC2A.root'
     )
 )
 
