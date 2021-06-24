@@ -14,7 +14,7 @@ Parameters and defaults:
 
 ```
 - $1 package - TriggerInfoTool
-- $2 branch - 2011 
+- $2 branch - 2011 (note that for TriggerInfoTool there no separate 2012 branch, 2011 is used also for 2012 
 - $3 configuration file - GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
 - $4 GlobalTag - FT_53_LV5_AN1
 - $5 GitHub orgaization/owner - cms-opendata-analyses
