@@ -19,7 +19,7 @@ scram b
 mkdir $globaltag
 
 curl https://raw.githubusercontent.com/katilp/condition-data-test/main/base_dump.txt > base_dump.txt
-sed -i 's/replacethis/$globaltag/g' base_dump.txt
+sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
 sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
