@@ -28,6 +28,14 @@ chmod +x prepare.sh
 ./prepare.sh
 ```
 
+The default is 2011 trigger test, for 2012 use
+
+```
+./prepare.sh TriggerInfoTool 2011 GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py FT53_V21A_AN6_FULL
+```
+
+2011 as a parameter is not a mistake, it is the branch name.
+
 Change the input file and the GlobalTag if needed in the config file and check that the GlobalTag commands are of form
 
 ```
@@ -37,6 +45,18 @@ process.GlobalTag.globaltag = '<global-tag-name>::All'
 
 and that the number of events is small.
 
+Alternatively, curl the  already modified config files
+
+curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py > TriggerInfoTool/GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
+
+or 
+
+curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2012_cfg.py >  TriggerInfoTool/GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
+
+
+
+
+
 ## find_db.sh
 
 ```
@@ -44,6 +64,13 @@ curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.s
 chmod +x find_db.sh
 ./find_db.sh
 ```
+The default is 2011 trigger test, for 2012 use
+
+```
+./find_db.sh TriggerInfoTool 2011 GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py FT53_V21A_AN6_FULL
+```
+
+Again, 2011 is not a mistake (and has no effect).
 
 Tested for trigger examples, modifications needed for JEC.
 
