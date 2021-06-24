@@ -125,8 +125,8 @@ total 4452
 ```
 
 The corresponding database dumps are in
-- [output/trigger_2012_dbfile_dump.txt]
-- [output/trigger_2011_dbfile_dump.txt]
+- [trigger_2012_dbfile_dump.txt](output/trigger_2012_dbfile_dump.txt)
+- [trigger_2011_dbfile_dump.txt](output/trigger_2011_dbfile_dump.txt)
 
 The database files can be generated with 
 
