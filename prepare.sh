@@ -13,18 +13,21 @@ if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$5; fi
 
 dbfile="$globaltag"_stripped.db
 
+# Set up area
+
 git clone -b $branch https://github.com/$gitdir/$package.git
 cd $package/
 scram b
 mkdir $globaltag
 
-dbfileline=$(grep process.GlobalTag.connect $config)
-sed -i "s/$dbfileline/process.GlobalTag.connect = cms.string('sqlite_file:"$globaltag".db')/g" $config
-tagline=$(grep process.GlobalTag.globaltag $config)
-sed -i "s/$tagline/process.GlobalTag.globaltag = '"$globaltag$::All'/g" $config
+# Modify the config file, this does not yet change the global tag, must be changed by hand!
+
+sed -i 's/\/cvmfs\/cms-opendata-conddb.cern.ch\///g' $config
+sed -i "s/::All/_stripped::All/g" $config
 eventline=$(grep process.maxEvents $config)
 sed -i "s/$eventline/process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1) )/g" $config
 
+# Prepare the initial main db file and the full dump
 
 curl https://raw.githubusercontent.com/katilp/condition-data-test/main/base_dump.txt > base_dump.txt
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
