@@ -13,7 +13,7 @@ if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$4; fi
 
 dbfile="$globaltag"_stripped.db
 
-git clone -$2 https://github.com/$gitdir/$package.git
+git clone -b $2 https://github.com/$gitdir/$package.git
 cd $package/
 scram b
 mkdir $globaltag
