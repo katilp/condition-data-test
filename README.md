@@ -8,11 +8,13 @@ Runs a CMSSW job with the condition database area locally. Reads the missing dat
 
 Parameters and defaults:
 
+```
 - $1 package - TriggerInfoTool
 - $2 branch - 2011 
 - $3 configuration file - GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
 - $4 GlobalTag - FT_53_LV5_AN1
 - $5 GitHub orgaization/owner - cms-opendata-analyses
+```
 
 ## prepare.sh
 
