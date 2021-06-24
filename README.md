@@ -47,12 +47,15 @@ and that the number of events is small.
 
 Alternatively, curl the  already modified config files
 
+```
 curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py > TriggerInfoTool/GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
+```
 
 or 
 
+```
 curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2012_cfg.py >  TriggerInfoTool/GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
-
+```
 
 
 
