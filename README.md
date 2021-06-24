@@ -22,7 +22,7 @@ chmod +x prepare.sh
 ./prepare.sh
 ```
 
-For any other config file than the default, it is best to check that the GlobalTag commands are of form
+Change the input file and the GlobalTag if needed in the config file and check that the GlobalTag commands are of form
 
 ```
 process.GlobalTag.connect = cms.string('sqlite_file:<global-tag-name>_stripped.db')
