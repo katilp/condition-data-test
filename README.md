@@ -2,7 +2,11 @@
 
 Script to extract condition database files from /cvmfs/cms-opendata-conddb.cern.ch
 
-Runs on a CMSS open data container with cvmfs mounted.
+Runs on a CMSSW open data container with cvmfs mounted on host, e.g
+
+```
+docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/cvmfs/cms-opendata-conddb.cern.ch" cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
+```
 
 Runs a CMSSW job with the condition database area locally. Reads the missing database file from the exception message and copies it to the local area. Adds the file information to a main db file. Loops until all needed files dowloaded.
 
