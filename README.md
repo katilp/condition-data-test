@@ -27,7 +27,7 @@ chmod +x prepare.sh
 Change the input file and the GlobalTag if needed in the config file and check that the GlobalTag commands are of form
 
 ```
-process.GlobalTag.connect = cms.string('sqlite_file:<global-tag-name>_stripped.db')
+process.GlobalTag.connect = cms.string('sqlite_file:<global-tag-name>.db')
 process.GlobalTag.globaltag = '<global-tag-name>::All'
 ```
 
