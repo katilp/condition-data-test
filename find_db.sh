@@ -15,7 +15,7 @@ if [ -z "$1" ]; then package=TriggerInfoTool; else package=$1; fi
 if [ -z "$2" ]; then branch=2011; else branch=$2; fi
 if [ -z "$3" ]; then config=GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py; else config=$3; fi
 if [ -z "$4" ]; then globaltag=FT_53_LV5_AN1; else globaltag=$4; fi
-dbfile="$globaltag"_stripped.db
+dbfile="$globaltag".db
 
 cd $package
 exception=start
