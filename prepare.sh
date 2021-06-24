@@ -35,8 +35,13 @@ sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
+echo *****************************************************************************************************************************************
 echo Check the input file and the GlobalTag in $package/$config
-echo Take an input file of the correponding year
-echo e.g. root://eospublic.cern.ch//eos/opendata/cms/Run2011A/SingleElectron/AOD/12Oct2013-v1/10000/1045436C-1240-E311-851B-003048D2BF1C.root for 2011
-echo and root://eospublic.cern.ch//eos/opendata/cms/Run2012B/MuHad/AOD/22Jan2013-v1/20000/002AED1E-1C74-E211-AAA3-00237DA1AC2A.root for 2012
+echo Take an input file of the corresponding year, e.g.
+echo 2011: root://eospublic.cern.ch//eos/opendata/cms/Run2011A/SingleElectron/AOD/12Oct2013-v1/10000/1045436C-1240-E311-851B-003048D2BF1C.root 
+echo 2012: root://eospublic.cern.ch//eos/opendata/cms/Run2012B/MuHad/AOD/22Jan2013-v1/20000/002AED1E-1C74-E211-AAA3-00237DA1AC2A.root 
+echo or curl the already modified trigger configs
+echo 2011: curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py > $package/$config 
+echo 2012: curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py > $package/$config
+echo *****************************************************************************************************************************************
 
