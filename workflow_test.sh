@@ -5,6 +5,7 @@ sudo chown $USER /mnt/vol
 pwd
 #cd ~/CMSSW_5_3_32/src/
 #source /opt/cms/cmsset_default.sh
+source /opt/cms/entrypoint.sh
 
 which git
 git --version
