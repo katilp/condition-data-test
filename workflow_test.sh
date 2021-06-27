@@ -1,6 +1,9 @@
 #!/bin/bash -l
 # parameters: $1 package, $2 branch, $3 configuration file with path from package root
 #             $4 GlobalTag $ GitHub organization/owner
+# set to accept failure as the cmsRun job is _expected_ to fail (Error: Process completed with exit code 65). This does not help, see below
+# set +e
+
 sudo chown $USER /mnt/vol
 
 echo Update paths:
@@ -9,8 +12,21 @@ echo $LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=${UPDATE_PATH}/lib:${LD_LIBRARY_PATH}
 export PATH=${UPDATE_PATH}/bin:${PATH}
 echo PATH updated to $PATH
+echo git versions:
 which git
 git --version
+echo openssl versions:
+which openssl
+openssl version
+echo Checking /usr/local/bin/git and openssl
+ls -l /usr/local/bin/git*
+ls -l /usr/local/bin/open*
+echo Checking /usr/local/libexec
+ls -l /usr/local/libexec
+echo Checking CMS env
+which cmsRun
+
+
 
 ls /cvmfs/cms-opendata-conddb.cern.ch
 
@@ -22,16 +38,17 @@ if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$5; fi
 
 dbfile="$globaltag".db
 
-# Set up area
-
-git clone -b $branch https://github.com/$gitdir/$package.git
+# Set up area 
+echo Cloning with the git protocol for now
+#git clone -b $branch https://github.com/$gitdir/$package.git
+git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
 mkdir $globaltag
 
 # Prepare the initial main db file and the full dump
 
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/base_dump.txt > base_dump.txt
+cp /mnt/vol/base_dump.txt .
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
 sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
@@ -40,6 +57,9 @@ cp /mnt/vol/find_db.sh .
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
 # FIXME: make this configurable
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py ">" $package/$config
+cp /mnt/vol/trigger_2011_cfg.py $config 
 
 ls -l
+
+# test run, add the second command to avoid exit on failure
+cmsRun $config || echo ignore
