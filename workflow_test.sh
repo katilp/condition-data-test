@@ -9,8 +9,18 @@ echo $LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=${UPDATE_PATH}/lib:${LD_LIBRARY_PATH}
 export PATH=${UPDATE_PATH}/bin:${PATH}
 echo PATH updated to $PATH
+echo git versions:
 which git
 git --version
+echo openssl versions:
+which openssl
+openssl version
+echo Checking /usr/local/bin
+ls -l /usr/local/bin
+echo Checking CMS env
+which cmsRun
+
+
 
 ls /cvmfs/cms-opendata-conddb.cern.ch
 
@@ -31,7 +41,7 @@ mkdir $globaltag
 
 # Prepare the initial main db file and the full dump
 
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/base_dump.txt > base_dump.txt
+cp /mnt/vol/base_dump.txt .
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
 sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
