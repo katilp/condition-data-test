@@ -54,6 +54,9 @@ cp /mnt/vol/find_db.sh .
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
 # FIXME: make this configurable
-cp /mnt/vol/trigger_2011_cfg.py $package/$config
+cp /mnt/vol/trigger_2011_cfg.py $config
 
 ls -l
+
+# test run
+cmsRun $config
