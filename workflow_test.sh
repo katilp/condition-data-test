@@ -35,9 +35,10 @@ if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$5; fi
 
 dbfile="$globaltag".db
 
-# Set up area
-
-git clone -b $branch https://github.com/$gitdir/$package.git
+# Set up area 
+echo Cloning with the git protocol for now
+#git clone -b $branch https://github.com/$gitdir/$package.git
+git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
 mkdir $globaltag
@@ -53,6 +54,6 @@ cp /mnt/vol/find_db.sh .
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
 # FIXME: make this configurable
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py ">" $package/$config
+cp /mnt/vol/trigger_2011_cfg.py $package/$config
 
 ls -l
