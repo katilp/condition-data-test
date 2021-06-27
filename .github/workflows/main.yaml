@@ -19,4 +19,4 @@ jobs:
       - name: Test CernVM-FS
         run: ls /cvmfs/cms-opendata-conddb.cern.ch
       - name: Start CMS OD container
-        run: docker run -v $(pwd):/mnt/vol -v /cvmfs:/cvmfs -w /home/cmsusr cmsopendata/cmssw_5_3_32_vnc /bin/bash  /mnt/vol/prepare.sh
+        run: docker run -v $(pwd):/mnt/vol -v /cvmfs:/cvmfs -w /home/cmsusr cmsopendata/cmssw_5_3_32_vnc /bin/bash  /mnt/vol/workflow_test.sh
