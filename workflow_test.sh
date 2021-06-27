@@ -1,6 +1,9 @@
 #!/bin/bash -l
 # parameters: $1 package, $2 branch, $3 configuration file with path from package root
 #             $4 GlobalTag $ GitHub organization/owner
+# set to accept failure as the cmsRun job is _expected_ to fail (Error: Process completed with exit code 65)
+set +e
+
 sudo chown $USER /mnt/vol
 
 echo Update paths:
