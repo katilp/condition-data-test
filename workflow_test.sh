@@ -3,8 +3,8 @@
 #             $4 GlobalTag $ GitHub organization/owner
 sudo chown $USER /mnt/vol
 pwd
-cd ~/CMSSW_5_3_32/src/
-source /opt/cms/cmsset_default.sh
+#cd ~/CMSSW_5_3_32/src/
+#source /opt/cms/cmsset_default.sh
 
 which git
 git --version
