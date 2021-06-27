@@ -15,8 +15,11 @@ git --version
 echo openssl versions:
 which openssl
 openssl version
-echo Checking /usr/local/bin
-ls -l /usr/local/bin
+echo Checking /usr/local/bin/git and openssl
+ls -l /usr/local/bin/git*
+ls -l /usr/local/bin/open*
+echo Checking /usr/local/libexec
+ls -l /usr/local/libexec
 echo Checking CMS env
 which cmsRun
 
