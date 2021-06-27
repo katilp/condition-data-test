@@ -1,0 +1,20 @@
+name: Extract missing db files
+on:
+  pull_request:
+    branches:
+    - main
+  push:
+    branches:
+    - main
+jobs:
+  test_workflow:
+    runs-on: ubuntu-latest
+    name: CMS OD with cvmfs for condition db search
+    steps:
+      # checkout the files of this repository
+      - uses: actions/checkout@v2
+      - uses: cvmfs-contrib/github-action-cvmfs@v2
+        with:
+          cvmfs_repositories: 'cms-opendata-conddb.cern.ch'
+      - name: Test CernVM-FS
+        run: ls /cvmfs/cms-opendata-conddb.cern.ch
