@@ -26,13 +26,14 @@ do
     i=$((i+1))
     n=$((2*i+1))
 
-    cmsRun $config > full.log 2>&1
+    cmsRun $config > full.log 2>&1 
 
     # find the exception 
-    exception="$(awk '/Exception Message:/{flag=1;next}/----- End Fatal Exception /{flag=0}flag' full.log \
-    | awk -F\" '{print $2}' | tr -d "\n")" 
+    exceptionmessage="$(awk '/Exception Message:/{flag=1;next}/----- End Fatal Exception /{flag=0}flag' full.log)"
+    echo $exceptionmessage
+    exception="$(echo $exceptionmessage | awk -F\" '{print $2}' | tr -d "\n")" 
 
-    if [ -z $exception ]
+    if [ -z $exceptionmessage ]
     then
         echo Hooray, no exception!
         exception=no
