@@ -54,6 +54,7 @@ cat base_dump.txt | sqlite3 $dbfile
 sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 cp /mnt/vol/find_db.sh .
+chmod +x find_db.sh
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
 # FIXME: make this configurable
@@ -62,4 +63,5 @@ cp /mnt/vol/trigger_2011_cfg.py $config
 ls -l
 
 # test run, add the second command to avoid exit on failure
-cmsRun $config || echo ignore
+# cmsRun $config || echo ignore
+./find_db.sh
