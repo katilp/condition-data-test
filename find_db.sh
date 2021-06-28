@@ -33,7 +33,8 @@ do
     echo $exceptionmessage
     exception="$(echo $exceptionmessage | awk -F\" '{print $2}' | tr -d "\n")" 
 
-    if [ -z $exceptionmessage ]
+    # use quotes to avoid an error message because of spaces in the string
+    if [ -z "$exceptionmessage" ]
     then
         echo Hooray, no exception!
         exception=no
@@ -48,6 +49,9 @@ do
             missingdb="$(echo $missingdbline |  awk -F\' '{print $(NF-3)}' | awk -F\/ '{print $(NF)}' | grep db)"
             echo Found $missingdb from the original db list    
         fi
+        
+        # check if missing db has been found
+        
 
         # copy the missing db file from cvmfs to the local directory
         cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
@@ -96,3 +100,9 @@ do
     fi
 
 done    
+
+echo These db files have been copied:
+ls $globaltag
+
+echo The main db file is:
+cat file_dump.txt
