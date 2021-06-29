@@ -56,10 +56,17 @@ do
         elif [ $nmatches = 1 ]
         then
             missingdb="$(echo $missingdbline |  awk -F\' '{print $(NF-3)}' | awk -F\/ '{print $(NF)}' | grep db)"
-            echo Found $missingdb from the original db list  
+            echo Found $missingdb from the original db list 
+        elif [ $nmatches = 0 ]
+        then
+            echo No db line corresponding the exception message found
+            echo other matches in the db file:
+            grep $exception original.txt
+            missingdb=notfound
+            exception=no
         else
-            echo Multiple db lines corresponding to the exception message
-            echo $missindbline
+            echo Multiple db lines corresponding to the exception message:
+            echo $missingdbline
             # need to handle it properly, for the moment stop the loop
             missingdb=notfound
             exception=no
