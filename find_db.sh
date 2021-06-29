@@ -67,16 +67,9 @@ do
             echo Multiple db lines corresponding to the exception message:
             echo $missingdbline
             # need to handle it properly, for the moment stop the loop
-            missigndblines=$(echo $missingdbline | tr ";" "\n")
-
-            echo Separate lines
-            for line in $missingdblines
-            do
-                echo $line
-            done
             
             echo Build an array and print
-            IFS='; ' read -r -a array <<< "$missingdbline"
+            IFS=';' read -r -a array <<< "$missingdbline"
             for element in "${array[@]}"
             do
                 echo "$element"
