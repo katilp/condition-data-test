@@ -22,14 +22,13 @@ exception=start
 i=0
 echo In $(pwd)
 echo Going to run $config
-cat $config
+#cat $config
 
 while [ $exception != no ]
 do
     i=$((i+1))
     n=$((2*i+1))
   
-    cmsRun $config
     cmsRun $config > full.log 2>&1 
 
     # find the exception from the cmsRun output
@@ -68,6 +67,23 @@ do
             echo Multiple db lines corresponding to the exception message:
             echo $missingdbline
             # need to handle it properly, for the moment stop the loop
+            missigndblines=$(echo $missingdbline | tr ";" "\n")
+
+            echo Separate lines
+            for line in $missingdblines
+            do
+                echo $line
+            done
+            
+            echo Build an array and print
+            IFS='; ' read -r -a array <<< "$missingdbline"
+            for element in "${array[@]}"
+            do
+                echo "$element"
+                echo Add semicolon "$element";
+            done
+
+            
             missingdb=notfound
             exception=no
         fi
