@@ -43,7 +43,7 @@ echo Cloning with the git protocol for now
 #git clone -b $branch https://github.com/$gitdir/$package.git
 git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
-scram b
+# scram b
 mkdir $globaltag
 
 # Prepare the initial main db file and the full dump
@@ -64,5 +64,5 @@ if [ $package = PhysObjectExtractorTool ]; then cp /mnt/vol/jec_cfg.py $config; 
 ls -l
 
 # test run, add the second command to avoid exit on failure
-# cmsRun $config || echo ignore
-./find_db.sh $package $branch $config $globaltag
+cmsRun $config || echo ignore
+# ./find_db.sh $package $branch $config $globaltag
