@@ -58,10 +58,11 @@ chmod +x find_db.sh
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
 # FIXME: make this configurable
-cp /mnt/vol/trigger_2011_cfg.py $config 
+if [ $package = TriggerInfoTool ]; then cp /mnt/vol/trigger_2011_cfg.py $config; fi
+if [ $package = PhysObjectExtractorTool ]; then cp /mnt/vol/jec_cfg.py $config; fi
 
 ls -l
 
 # test run, add the second command to avoid exit on failure
 # cmsRun $config || echo ignore
-./find_db.sh
+./find_db.sh $package $branch $config $globaltag
