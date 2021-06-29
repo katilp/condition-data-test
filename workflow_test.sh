@@ -55,6 +55,8 @@ sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 cp /mnt/vol/find_db.sh .
 chmod +x find_db.sh
+cp /mnt/vol/dbname.py .
+chmod +x dbname.py
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
 # FIXME: make this configurable
