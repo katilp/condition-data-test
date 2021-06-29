@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 
-isData = False
+isData = True
 #if len(sys.argv) > 1: isData = bool(eval(sys.argv[1]))
 #print 'Writing JEC text files. isData = ',isData
 
