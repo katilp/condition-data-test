@@ -12,7 +12,9 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 # connect to global tag
 if isData:
 #    process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/FT53_V21A_AN6_FULL.db')
-    process.GlobalTag.globaltag = 'FT53_V21A_AN6::All'
+    process.GlobalTag.connect = cms.string('sqlite_file:FT53_V21A_AN6_FULL.db')
+    process.GlobalTag.globaltag = 'FT53_V21A_AN6_FULL::All'
+    #process.GlobalTag.globaltag = 'FT53_V21A_AN6::All'
 else:
 #    process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/START53_V27.db')
     process.GlobalTag.globaltag = 'START53_V27::All'
@@ -27,7 +29,7 @@ process.ak5 = cms.EDAnalyzer('JetCorrectorDBReader',
                              createTextFile=cms.untracked.bool(True))
 
 if isData:
-    process.ak5.globalTag = cms.untracked.string('FT53_V21A_AN6')
+    process.ak5.globalTag = cms.untracked.string('FT53_V21A_AN6_FULL')
 else:
     process.ak5.globalTag = cms.untracked.string('START53_V27')
 
