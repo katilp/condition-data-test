@@ -68,12 +68,7 @@ do
             echo $missingdbline
             # need to handle it properly, for the moment stop the loop
             
-            echo Build an array and print
-            IFS=';' read -r -a array <<< "$missingdbline"
-            for element in "${array[@]}"
-            do
-                echo "$element"
-            done
+            python2 dbname.py $missingdbline
             
             missingdb=notfound
             exception=no
