@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 # find the filename in the full db line of type:
 # INSERT INTO TAGINVENTORY_TABLE VALUES('JetCorrectorParametersCollection_Legacy11_V1_DATA_AK7JPT',
 #   'JetCorrectorParametersCollection','JetCorrectionsRecord',16,
