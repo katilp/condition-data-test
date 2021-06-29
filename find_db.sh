@@ -28,7 +28,8 @@ while [ $exception != no ]
 do
     i=$((i+1))
     n=$((2*i+1))
-
+  
+    cmsRun $config
     cmsRun $config > full.log 2>&1 
 
     # find the exception from the cmsRun output
