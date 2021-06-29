@@ -28,7 +28,7 @@ do
 
     cmsRun $config > full.log 2>&1 
 
-    # find the exception 
+    # find the exception from the cmsRun output
     exceptionmessage="$(awk '/Exception Message:/{flag=1;next}/----- End Fatal Exception /{flag=0}flag' full.log)"
     echo $exceptionmessage
     exception="$(echo $exceptionmessage | awk -F\" '{print $2}' | tr -d "\n")" 
@@ -39,20 +39,31 @@ do
         echo Hooray, no exception!
         exception=no
     else
+        echo Exception is $exception
+        # check if the exception name is the db file name in the listing and count how many times
         missingdbline="$(grep $exception original.txt | grep db)"
+        nmatches="$(echo $missingdbline | grep -o .db | wc -l)"
+        # check if the exception itself has the .db file extension
         if [ "$(echo $exception | awk -F. '{print $(NF)}')" = db ]
         then
             missingdb="$(echo $exception | awk -F \/ '{print $(NF)}')"
             echo Found $missingdb from the execption message
-        else
-            echo Exception is $exception
+        # check that only one match in the db listing with the db name corresponding to the exception  
+        elif [ $nmatches = 1 ]
+        then
             missingdb="$(echo $missingdbline |  awk -F\' '{print $(NF-3)}' | awk -F\/ '{print $(NF)}' | grep db)"
-            echo Found $missingdb from the original db list    
+            echo Found $missingdb from the original db list  
+        else
+            echo Multiple db lines corresponding to the exception message
+            echo $missindbline
+            # need to handle it properly, for the moment stop the loop
+            missingdb=notfound
+            exception=no
         fi
         
         # check if missing db has been found
-        
-
+        if [ $missingdb != notfound ]
+        then
         # copy the missing db file from cvmfs to the local directory
         cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
 
@@ -97,6 +108,7 @@ do
 
         rm $dbfile
         cat file_dump.txt | sqlite3 $dbfile
+        fi
     fi
 
 done    
