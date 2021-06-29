@@ -72,7 +72,7 @@ do
             IFS=';' read -r -a array <<< "$missingdbline"
             for element in "${array[@]}"
             do
-                echo "$element"";"
+                echo "$element"
             done
             
             missingdb=notfound
