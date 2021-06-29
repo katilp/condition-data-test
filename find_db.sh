@@ -87,7 +87,7 @@ do
         echo Modifying line $val1line
         sed -i "s/$val1line/INSERT INTO TAGTREE_TABLE_"$globaltag" VALUES(1,4294967295,$((n+2)),'All',0,0,1,0);/g" file_dump.txt
         val2line="$(grep "VALUES(2," file_dump.txt)"
-        sed -i "s/$val2line/INSERT INTO TAGTREE_TABLE_"$globaltag" VALUES(2,0,$((n+i)),'Calibration',0,1,2,0);/g" file_dump.txt
+        sed -i "s/$val2line/INSERT INTO TAGTREE_TABLE_"$globaltag" VALUES(2,0,$((n+1)),'Calibration',0,1,2,0);/g" file_dump.txt
         echo Modifying line $val2line
 
         # get tag inventory total line and change it to 
