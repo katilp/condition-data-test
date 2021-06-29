@@ -22,6 +22,7 @@ exception=start
 i=0
 echo In $(pwd)
 echo Going to run $config
+cat $config
 
 while [ $exception != no ]
 do
