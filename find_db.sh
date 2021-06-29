@@ -20,6 +20,8 @@ dbfile="$globaltag".db
 cd $package
 exception=start
 i=0
+echo In $(pwd)
+echo Going to run $config
 
 while [ $exception != no ]
 do
