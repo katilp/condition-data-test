@@ -72,14 +72,14 @@ do
             IFS=';' read -r -a array <<< "$missingdbline"
             for element in "${array[@]}"
             do
-                echo "$element"
-                echo Add semicolon "$element";
+                echo "$element"";"
             done
-
             
             missingdb=notfound
             exception=no
         fi
+        
+        echo Value of missingdb is $missingdb
         
         # check if missing db has been found
         if [ $missingdb != notfound ]
