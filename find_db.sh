@@ -68,7 +68,7 @@ do
             echo $missingdbline
             # need to handle it properly, for the moment stop the loop
             
-            python2 dbname.py $missingdbline
+            python dbname.py $missingdbline
             
             missingdb=notfound
             exception=no
