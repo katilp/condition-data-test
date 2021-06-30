@@ -26,9 +26,6 @@ echo Going to run $config
 
 while [ $exception != no ]
 do
-    i=$((i+1))
-    n=$((2*i+1))
-  
     cmsRun $config > full.log 2>&1 
 
     # find the exception from the cmsRun output
@@ -45,6 +42,7 @@ do
         echo Exception is $exception
         missingdblines="$(grep $exception original.txt | grep db)"
         filelist=$( ./dbname.py "$missingdblines" )
+        echo Found these dbs:
         echo $filelist
         dbnlist=$( ./dbnumber.py "$missingdblines" )
         echo $dbnlist
@@ -52,7 +50,11 @@ do
         names=( $filelist )
         numbers=( $dbnlist )
         
-        for index in ${!names[*]}; do 
+        for index in ${!names[*]}; do
+        
+            i=$((i+1))
+            n=$((2*i+1))
+            
             missingdb=${names[$index]}
             dbnumber=${numbers[$index]}
             missingdbline=$( ./dbline.py "$missingdblines" $index )
