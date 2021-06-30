@@ -45,6 +45,7 @@ git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
 mkdir $globaltag
+mkdir /mnt/vol/products
 
 # Prepare the initial main db file and the full dump
 
