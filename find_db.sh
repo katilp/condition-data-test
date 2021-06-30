@@ -116,5 +116,10 @@ done
 echo These db files have been copied:
 ls $globaltag
 
+cp -r $globaltag /mnt/vol/products
+
 echo The main db file is:
 cat file_dump.txt
+
+cp file_dump.txt /mnt/vol/products/
+cp $dbfile /mnt/vol/products/
