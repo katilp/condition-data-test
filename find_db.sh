@@ -42,7 +42,7 @@ do
         echo Exception is $exception
         missingdblines="$(grep $exception original.txt | grep db)"
         
-        nchar = 1
+        nchar=1
         while [ -z "$missingdblines" ]
         do
             var=${exception::${#exception}-$nchar}
