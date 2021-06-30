@@ -41,6 +41,15 @@ do
     else
         echo Exception is $exception
         missingdblines="$(grep $exception original.txt | grep db)"
+        
+        nchar = 1
+        while [ -z "$missingdblines" ]
+        do
+            var=${exception::${#exception}-$nchar}
+            missingdblines="$(grep $var original.txt | grep db)"
+            nchar=$((nchar+1))
+        done
+        
         filelist=$( ./dbname.py "$missingdblines" )
         echo Found these dbs:
         echo $filelist
