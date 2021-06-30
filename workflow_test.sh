@@ -67,12 +67,12 @@ chmod +x dbline.py
 
 # FIXME: make this configurable
 if [ $package = TriggerInfoTool ]; then cp /mnt/vol/trigger_2011_cfg.py $config; fi
-if [ $package = PhysObjectExtractorTool && $gitdir = cms-legacydata-analyses ]; then config=/mnt/vol/jec_cfg.py; fi
+if [ $package = PhysObjectExtractorTool ] && [ $gitdir = cms-legacydata-analyses ]; then config=/mnt/vol/jec_cfg.py; fi
 
 ls -l
 
 # test run, add the second command to avoid exit on failure
-# cmsRun $config || echo ignore
+cmsRun $config || echo ignore
 # cmsRun /mnt/vol/jec_cfg.py || echo ignore
 
 ./find_db.sh $package $branch $config $globaltag
