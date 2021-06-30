@@ -57,6 +57,10 @@ cp /mnt/vol/find_db.sh .
 chmod +x find_db.sh
 cp /mnt/vol/dbname.py .
 chmod +x dbname.py
+cp /mnt/vol/dbnumber.py .
+chmod +x dbnumber.py
+cp /mnt/vol/dbline.py .
+chmod +x dbline.py
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
 # FIXME: make this configurable
