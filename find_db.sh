@@ -72,10 +72,10 @@ do
             # get text file
             sqlite3  $dbfile .dump > file_dump.txt
 
-            # add the missing line and substitute the db number with i
+            # add the missing line and substitute the db number with i (the second substitution is to avoid error sed: -e expression #1, char 34: unknown command: `I')
             newdbline="$(echo "${missingdbline/$dbnumber,/$i,}")"
-            #sed -i "/CREATE TABLE coral_sqlite_fk(id TEXT NOT NULL, name TEXT, tablename TEXT NOT NULL);/i $newdbline" file_dump.txt
-            sed -i "/CREATE TABLE coral_sqlite_fk/i $newdbline" file_dump.txt
+            newline="$(echo $newdbline)"
+            sed -i "/CREATE TABLE coral_sqlite_fk/i $newline" file_dump.txt
             echo Adding line $newdbline
 
             # change the two numbers for lines All and Calibration to 2*i+2 and 2*i+1
