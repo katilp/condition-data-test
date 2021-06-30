@@ -69,7 +69,7 @@ do
             # need to handle it properly, for the moment stop the loop
             
             python dbname.py $missingdbline # no output?
-            echo "$(python dbname.py $missingdbline)"
+            echo $(./dbname.py $missingdbline)
             
             missingdb=notfound
             exception=no
