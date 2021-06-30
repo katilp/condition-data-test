@@ -74,7 +74,8 @@ do
 
             # add the missing line and substitute the db number with i
             newdbline="$(echo "${missingdbline/$dbnumber,/$i,}")"
-            sed -i "/CREATE TABLE coral_sqlite_fk(id TEXT NOT NULL, name TEXT, tablename TEXT NOT NULL);/i $newdbline" file_dump.txt
+            #sed -i "/CREATE TABLE coral_sqlite_fk(id TEXT NOT NULL, name TEXT, tablename TEXT NOT NULL);/i $newdbline" file_dump.txt
+            sed -i "/CREATE TABLE coral_sqlite_fk/i $newdbline" file_dump.txt
             echo Adding line $newdbline
 
             # change the two numbers for lines All and Calibration to 2*i+2 and 2*i+1
