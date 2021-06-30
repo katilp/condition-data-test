@@ -101,10 +101,10 @@ do
             sed -i "s/$tagtree/INSERT INTO TAGTREE_"$globaltag"_IDS VALUES($((i+2)));/g" file_dump.txt
             echo Modifying line 'INSERT INTO TAGTREE_'$globaltag'_IDS VALUES('$((i+2))');'
 
-            echo The updated db file is:
-            cat file_dump.txt
-            echo These db files have been copied:
-            ls $globaltag
+            #echo The updated db file is:
+            #cat file_dump.txt
+            #echo These db files have been copied:
+            #ls $globaltag
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
@@ -116,5 +116,11 @@ done
 echo These db files have been copied:
 ls $globaltag
 
+ls -l /mnt/vol
+sudo cp -r $globaltag /mnt/vol/outputs
+
 echo The main db file is:
 cat file_dump.txt
+
+sudo cp file_dump.txt /mnt/vol/outputs
+sudo cp $dbfile /mnt/vol/outputs
