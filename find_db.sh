@@ -68,8 +68,8 @@ do
             echo $missingdbline
             # need to handle it properly, for the moment stop the loop
             
-            python dbname.py $missingdbline # no output?
-            echo $(./dbname.py $missingdbline)
+            filelist=$( ./dbname.py $missingdbline )
+            echo $filelist
             
             missingdb=notfound
             exception=no
