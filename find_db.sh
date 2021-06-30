@@ -67,8 +67,11 @@ do
             echo Multiple db lines corresponding to the exception message:
             echo $missingdbline
             # need to handle it properly, for the moment stop the loop
-            
-            filelist=$( ./dbname.py $missingdbline )
+            echo Option 1:
+            filelist=`./dbname.py "$missingdbline"`
+            echo $filelist
+            echo Option 2:
+            filelist=$( ./dbname.py "$missingdbline" )
             echo $filelist
             
             missingdb=notfound
