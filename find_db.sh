@@ -73,6 +73,10 @@ do
             echo Value of dbnumber is $dbnumber
         
             # copy the missing db file from cvmfs to the local directory
+            # add a protection for large files, if they are over ~GB the GitHub workflow won't be able to handle them, set to 100M here
+            filesize="$(echo "$(ls -Ssr /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb)" | awk -F/ '{print $1}' )"
+            if (( $filesize < 100000 ))
+            then
             cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
 
             # find the name in the tag tree corresponding to this db number
@@ -117,6 +121,9 @@ do
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
+            else
+              echo The file of size $filesize was not copied. The workflow may remain in a look if it it was really needed. 
+            fi
         done
     fi
 
