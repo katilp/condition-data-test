@@ -46,6 +46,7 @@ cd $package/
 scram b
 mkdir $globaltag
 mkdir /mnt/vol/products
+ls -l /mnt/vol
 
 # Prepare the initial main db file and the full dump
 
