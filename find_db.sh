@@ -113,14 +113,20 @@ do
 
 done    
 
-echo These db files have been copied:
-ls $globaltag
+if [ $i = 0 ] 
+then
+    echo "No condition db files needed. Are you sure? Here's the job output again:"
+    cat full.log
+else  
+    echo These db files have been copied:
+    ls $globaltag
 
-ls -l /mnt/vol
-sudo cp -r $globaltag /mnt/vol/outputs
+    ls -l /mnt/vol
+    sudo cp -r $globaltag /mnt/vol/outputs
 
-echo The main db file is:
-cat file_dump.txt
+    echo The main db file is:
+    cat file_dump.txt
 
-sudo cp file_dump.txt /mnt/vol/outputs
-sudo cp $dbfile /mnt/vol/outputs
+    sudo cp file_dump.txt /mnt/vol/outputs
+    sudo cp $dbfile /mnt/vol/outputs
+fi
