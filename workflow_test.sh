@@ -72,7 +72,7 @@ if [ $package = PhysObjectExtractorTool ] && [ $gitdir = cms-legacydata-analyses
 ls -l
 
 # test run, add the second command to avoid exit on failure
-cmsRun $config || echo ignore
+# cmsRun $config || echo ignore
 # cmsRun /mnt/vol/jec_cfg.py || echo ignore
 
 ./find_db.sh $package $branch $config $globaltag
