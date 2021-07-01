@@ -127,7 +127,7 @@ do
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
             #else
-            #  echo The file of size $filesize was not copied. The workflow may remain in a look if it it was really needed. 
+            #  echo The file of size $filesize was not copied. The workflow may remain in a loop if it it was really needed. 
             #fi
         done
     fi
@@ -137,7 +137,6 @@ done
 if [ $i = 0 ] 
 then
     echo "No condition db files needed. Are you sure? Here's the job output again:"
-    cat full.log
 else  
     echo These db files have been copied:
     ls $globaltag
@@ -150,4 +149,8 @@ else
 
     sudo cp file_dump.txt /mnt/vol/outputs
     sudo cp $dbfile /mnt/vol/outputs
+    
+    echo The output of the last job:
 fi
+
+cat full.log
