@@ -78,7 +78,8 @@ do
             if (( $filesize > 200000 ))
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
-               touch $globaltag/$missingdb
+               cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
+               cp $missingdb $globaltag
             else   
                cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
             fi
