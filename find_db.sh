@@ -41,6 +41,15 @@ do
     else
         echo Exception is $exception
         missingdblines="$(grep $exception original.txt | grep db)"
+        
+        nchar=1
+        while [ -z "$missingdblines" ]
+        do
+            var=${exception::${#exception}-$nchar}
+            missingdblines="$(grep $var original.txt | grep db)"
+            nchar=$((nchar+1))
+        done
+        
         filelist=$( ./dbname.py "$missingdblines" )
         echo Found these dbs:
         echo $filelist
@@ -64,7 +73,16 @@ do
             echo Value of dbnumber is $dbnumber
         
             # copy the missing db file from cvmfs to the local directory
-            cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
+            # add a protection for large files, if they are over ~GB the GitHub workflow won't be able to handle them, set to 100M here
+            filesize="$(echo "$(ls -Ssr /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb)" | awk -F/ '{print $1}' )"
+            if (( $filesize > 200000 ))
+            then
+               echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
+               cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
+               cp $missingdb $globaltag
+            else   
+               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
+            fi
 
             # find the name in the tag tree corresponding to this db number
             tagtreename="$(grep \',$dbnumber, original.txt  | grep TAGTREE | awk -F\, '{print $(NF-4)}')"
@@ -108,19 +126,31 @@ do
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
+            #else
+            #  echo The file of size $filesize was not copied. The workflow may remain in a loop if it it was really needed. 
+            #fi
         done
     fi
 
 done    
 
-echo These db files have been copied:
-ls $globaltag
+if [ $i = 0 ] 
+then
+    echo "No condition db files needed. Are you sure? Here's the job output again:"
+else  
+    echo These db files have been copied:
+    ls $globaltag
 
-ls -l /mnt/vol
-sudo cp -r $globaltag /mnt/vol/outputs
+    ls -l /mnt/vol
+    sudo cp -r $globaltag /mnt/vol/outputs
 
-echo The main db file is:
-cat file_dump.txt
+    echo The main db file is:
+    cat file_dump.txt
 
-sudo cp file_dump.txt /mnt/vol/outputs
-sudo cp $dbfile /mnt/vol/outputs
+    sudo cp file_dump.txt /mnt/vol/outputs
+    sudo cp $dbfile /mnt/vol/outputs
+    
+    echo The output of the last job:
+fi
+
+cat full.log
