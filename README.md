@@ -1,6 +1,6 @@
 # Extract database files from conditions database
 
-Script to extract condition database files from /cvmfs/cms-opendata-conddb.cern.ch
+Script to extract condition database files needed in a CMSSW analysis job from `/cvmfs/cms-opendata-conddb.cern.ch`. 
 
 Runs on a CMSSW open data container with cvmfs mounted on host, e.g
 
