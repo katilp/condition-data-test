@@ -10,31 +10,23 @@ docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/cvm
 
 Runs a CMSSW job with the condition database area locally. Reads the missing database file from the exception message and copies it to the local area. Adds the file information to a main db file. Loops until all needed files dowloaded.
 
-Parameters and defaults:
+## Parameters and defaults:
 
 ```
 - $1 package - TriggerInfoTool
 - $2 branch - 2011 (note that for TriggerInfoTool there no separate 2012 branch, 2011 is used also for 2012 
 - $3 configuration file - GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
 - $4 GlobalTag - FT_53_LV5_AN1
-- $5 GitHub orgaization/owner - cms-opendata-analyses
+- $5 GitHub orgainzation/owner - cms-opendata-analyses
 ```
 
-## prepare.sh
+If TriggerInfoTool or PhysObjectExtractor are given as package, a local config with the needed modification for GT settings is used.
 
-```
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/prepare.sh > prepare.sh
-chmod +x prepare.sh
-./prepare.sh
-```
 
-The default is 2011 trigger test, for 2012 use
 
-```
-./prepare.sh TriggerInfoTool 2011 GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py FT53_V21A_AN6_FULL
-```
+## Scripts
 
-2011 as a parameter is not a mistake, it is the branch name.
+The script is in two parts: test_workflow.sh and find_db.sh. It runs from a GitHib workflow where a GitHub repository and a GT (one of those available on /cvmfs/cms-opendata-conddb.cern.ch/) can be used as input.
 
 Change the input file and the GlobalTag if needed in the config file and check that the GlobalTag commands are of form
 
@@ -45,41 +37,14 @@ process.GlobalTag.globaltag = '<global-tag-name>::All'
 
 and that the number of events is small.
 
-Alternatively, curl the  already modified config files
+## GitHub action output
 
-```
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2011_cfg.py > TriggerInfoTool/GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
-```
-
-or 
-
-```
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/trigger_2012_cfg.py >  TriggerInfoTool/GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py
-```
+The GitHub action workflow writes he db files (copied from /cvmfs/cms-opendata-conddb.cern.ch/<global-tag-name>), updated stripped main db file <global-tag-name>.db and the text dump of it are in the artifact.
 
 
+## Output directory
 
-
-## find_db.sh
-
-```
-curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
-chmod +x find_db.sh
-./find_db.sh
-```
-The default is 2011 trigger test, for 2012 use
-
-```
-./find_db.sh TriggerInfoTool 2011 GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py FT53_V21A_AN6_FULL
-```
-
-Again, 2011 is not a mistake (and has no effect).
-
-Tested for trigger examples, modifications needed for JEC.
-
-## Output
-
-For the trigger info test, the following database files are needed in order to run the job without external database access:
+An example output from TriggerInfoTool is in the output directory. For the trigger info test, the following database files are needed in order to run the job without external database access:
 
 ```
 L1GtPrescaleFactorsAlgoTrig_CRAFT09v2_hlt.db
