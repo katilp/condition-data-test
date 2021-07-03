@@ -26,7 +26,7 @@ If TriggerInfoTool or PhysObjectExtractor are given as package, a local config w
 
 ## Scripts
 
-The script is in two parts: test_workflow.sh and find_db.sh. It runs from a GitHib workflow where a GitHub repository and a GT (one of those available on /cvmfs/cms-opendata-conddb.cern.ch/) can be used as input.
+The script is in two parts: `test_workflow.sh` which set ups the working area and `find_db.sh` which runs the job. It runs from a GitHib workflow where a GitHub repository and a GT (one of those available on `/cvmfs/cms-opendata-conddb.cern.ch/`) can be used as input.
 
 Change the input file and the GlobalTag if needed in the config file and check that the GlobalTag commands are of form
 
@@ -39,7 +39,7 @@ and that the number of events is small.
 
 ## GitHub action output
 
-The GitHub action workflow writes he db files (copied from /cvmfs/cms-opendata-conddb.cern.ch/<global-tag-name>), updated stripped main db file <global-tag-name>.db and the text dump of it are in the artifact.
+The GitHub action workflow writes he db files (copied from `/cvmfs/cms-opendata-conddb.cern.ch/<global-tag-name>`), updated stripped main db file `<global-tag-name>.db` and the text dump of it are in the artifact.
 
 
 ## Output directory
