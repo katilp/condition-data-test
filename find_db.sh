@@ -141,7 +141,6 @@ else
     echo These db files have been copied:
     ls $globaltag
 
-    ls -l /mnt/vol
     sudo cp -r $globaltag /mnt/vol/outputs
 
     echo The main db file is:
