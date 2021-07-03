@@ -64,8 +64,8 @@ cp /mnt/vol/dbline.py .
 chmod +x dbline.py
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
-# FIXME: make this configurable
-if [ $package = TriggerInfoTool ]; then cp /mnt/vol/trigger_2011_cfg.py $config; fi
+# FIXME: make this configurable, if cloning from the original repo's, take a local config with the needed modifications
+if [ $package = TriggerInfoTool ]  && [ $gitdir = cms-opendata-analyses ]; then cp /mnt/vol/trigger_2011_cfg.py $config; fi
 if [ $package = PhysObjectExtractorTool ] && [ $gitdir = cms-legacydata-analyses ]; then config=/mnt/vol/jec_cfg.py; fi
 
 ls -l
