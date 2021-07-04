@@ -73,5 +73,7 @@ ls -l
 # test run, add the second command to avoid exit on failure
 # cmsRun $config || echo ignore
 # cmsRun /mnt/vol/jec_cfg.py || echo ignore
+# prepare the txt fb files as they are needed for the job to run in any case...
+cmsRun /mnt/vol/jec_cfg_2011_data.py
 
 ./find_db.sh $package $branch $config $globaltag
