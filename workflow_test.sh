@@ -36,6 +36,12 @@ if [ -z "$4" ]; then globaltag=FT_53_LV5_AN1; else globaltag=$4; fi
 if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$5; fi
 
 dbfile="$globaltag".db
+# debugging cvmfs access
+echo 
+ls -l /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db
+ls -l /cvmfs/cms-opendata-conddb.cern.ch/$dbfile
+ls -l /cvmfs/cms-opendata-conddb.cern.ch/START53_LV6A1.db
+
 
 # Set up area 
 echo Cloning with the git protocol for now
@@ -61,6 +67,8 @@ cp /mnt/vol/base_dump.txt .
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
 ls -l /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db
+ls -l /cvmfs/cms-opendata-conddb.cern.ch/$dbfile
+ls -l /cvmfs/cms-opendata-conddb.cern.ch/START53_LV6A1.db
 sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 cp /mnt/vol/find_db.sh .
