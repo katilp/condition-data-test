@@ -4,6 +4,7 @@
 # set -e
 
 sudo chown $USER /mnt/vol
+sudo chown $USER /opt
 
 echo Update paths:
 echo $UPDATE_PATH
@@ -43,7 +44,7 @@ echo Cloning with the git protocol for now
 git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
-mkdir $globaltag
+mkdir -p /opt/cms-opendata-conddb/$globaltag
 mkdir /mnt/vol/products
 ls -l /mnt/vol
 
