@@ -47,7 +47,7 @@ scram b
 
 # prepare the txt fb files as they are needed for the job to run in any case...
 cd PhysObjectExtractor/JEC
-cmsRun /mnt/vol/jec_cfg_2011_data.py
+cmsRun /mnt/vol/jec_cfg_2011_mc.py
 ls -l
 cd ../..
 mkdir $globaltag
