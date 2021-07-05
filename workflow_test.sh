@@ -47,14 +47,14 @@ scram b
 
 # prepare the txt fb files as they are needed for the job to run in any case...
 # this step reads the files from cvmfs
-ln -sf /cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1 FT_53_LV5_AN1
-ln -sf /cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1.db FT_53_LV5_AN1.db
-ls -l
-ls -l /cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1/*JetCorrection*
-ls -l FT_53_LV5_AN1/*JetCorrection*
+#ln -sf /cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1 FT_53_LV5_AN1
+#ln -sf /cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1.db FT_53_LV5_AN1.db
+#ls -l
+#ls -l /cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1/*JetCorrect*
+#ls -l FT_53_LV5_AN1/*JetCorrect*
 cmsRun /mnt/vol/jec_cfg_2011_data.py
-rm FT_53_LV5_AN1
-rm FT_53_LV5_AN1.db
+#rm FT_53_LV5_AN1
+#rm FT_53_LV5_AN1.db
 
 mkdir $globaltag
 mkdir /mnt/vol/products
