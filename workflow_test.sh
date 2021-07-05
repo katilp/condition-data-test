@@ -82,4 +82,4 @@ ls -l
 # test run, add the second command to avoid exit on failure
 # cmsRun $config || echo ignore
 
-#./find_db.sh $package $branch $config $globaltag
+./find_db.sh $package $branch $config $globaltag
