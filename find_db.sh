@@ -79,9 +79,9 @@ do
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
-               cp $missingdb /cat/cms-opendata-conddb/$globaltag
+               cp $missingdb /opt/cms-opendata-conddb/$globaltag
             else   
-               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cat/cms-opendata-conddb/$globaltag
+               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /opt/cms-opendata-conddb/$globaltag
             fi
 
             # find the name in the tag tree corresponding to this db number
