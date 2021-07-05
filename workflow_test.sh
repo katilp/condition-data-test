@@ -4,6 +4,7 @@
 # set -e
 
 sudo chown $USER /mnt/vol
+sudo chown $USER /opt
 
 echo Update paths:
 echo $UPDATE_PATH
