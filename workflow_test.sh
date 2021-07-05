@@ -43,15 +43,24 @@ echo Cloning with the git protocol for now
 git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
+
+
+# prepare the txt fb files as they are needed for the job to run in any case...
+cd PhysObjectExtractor/JEC
+cmsRun /mnt/vol/jec_cfg_2011_data.py
+ls -l
+cd ../..
 mkdir $globaltag
 mkdir /mnt/vol/products
-ls -l /mnt/vol
+#ls -l /mnt/vol
+
 
 # Prepare the initial main db file and the full dump
 
 cp /mnt/vol/base_dump.txt .
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
+ls -l /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db
 sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 cp /mnt/vol/find_db.sh .
@@ -72,6 +81,5 @@ ls -l
 
 # test run, add the second command to avoid exit on failure
 # cmsRun $config || echo ignore
-# cmsRun /mnt/vol/jec_cfg.py || echo ignore
 
 ./find_db.sh $package $branch $config $globaltag
