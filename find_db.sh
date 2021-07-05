@@ -143,9 +143,9 @@ then
     echo "No condition db files needed. Are you sure? Here's the job output again:"
 else  
     echo These db files have been copied:
-    ls /opt/cms-opendata-condb/$globaltag
+    ls /opt/cms-opendata-conddb/$globaltag
 
-    sudo cp -r /opt/cms-opendata-condb/$globaltag /mnt/vol/outputs
+    sudo cp -r /opt/cms-opendata-conddb/$globaltag /mnt/vol/outputs
 
     echo The main db file is:
     cat file_dump.txt
