@@ -93,8 +93,10 @@ do
             # add the missing line and substitute the db number with i (the second substitution is to avoid error sed: -e expression #1, char 34: unknown command: `I')
             newdbline="$(echo "${missingdbline/$dbnumber,/$i,}")"
             newline="$(echo $newdbline)"
-            sed -i "/CREATE TABLE coral_sqlite_fk/i $newline" file_dump.txt
-            echo Adding line $newdbline
+            newpath="$(echo "${newline/sqlite_file:./sqlite_file:/opt/cms-opendata-conddb}")"
+            newpathline=$(echo $newpath)"
+            sed -i "/CREATE TABLE coral_sqlite_fk/i $newpathline" file_dump.txt
+            echo Adding line $newpathline
 
             # change the two numbers for lines All and Calibration to 2*i+2 and 2*i+1
             val1line="$(grep "VALUES(1," file_dump.txt)"
