@@ -11,12 +11,12 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 # connect to global tag
 if isData:
-    process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1.db')
+#    process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/FT_53_LV5_AN1.db')
 #    process.GlobalTag.connect = cms.string('sqlite_file:FT53_V21A_AN6_FULL.db')
     process.GlobalTag.globaltag = 'FT_53_LV5_AN1::All'
     #process.GlobalTag.globaltag = 'FT53_V21A_AN6::All'
 else:
-    process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/START53_LV6A1.db')
+#    process.GlobalTag.connect = cms.string('sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch/START53_LV6A1.db')
     process.GlobalTag.globaltag = 'START53_LV6A1::All'
 
 
