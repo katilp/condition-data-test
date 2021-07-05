@@ -60,6 +60,7 @@ mkdir /mnt/vol/products
 cp /mnt/vol/base_dump.txt .
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
+ls -l /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db
 sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 cp /mnt/vol/find_db.sh .
@@ -81,4 +82,4 @@ ls -l
 # test run, add the second command to avoid exit on failure
 # cmsRun $config || echo ignore
 
-./find_db.sh $package $branch $config $globaltag
+#./find_db.sh $package $branch $config $globaltag
