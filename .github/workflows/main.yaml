@@ -21,7 +21,7 @@ jobs:
         #run: docker run -v $(pwd):/mnt/vol -v /cvmfs:/cvmfs -w /home/cmsusr cmsopendata/cmssw_5_3_32_vnc /bin/bash  /mnt/vol/workflow_test.sh PhysObjectExtractorTool master PhysObjectExtractor/JEC/jec_py.cfg FT53_V21A_AN6_FULL cms-legacydata-analyses
         run: | 
           # docker run -v $(pwd):/mnt/vol -v /cvmfs:/cvmfs -w /home/cmsusr cmsopendata/cmssw_5_3_32_vnc /bin/bash  /mnt/vol/workflow_test.sh
-          docker run -v $(pwd):/mnt/vol -v /cvmfs:/cvmfs -w /home/cmsusr cmsopendata/cmssw_5_3_32_vnc /bin/bash  /mnt/vol/workflow_test.sh PhysObjectExtractorTool master PhysObjectExtractor/python/poet_cfg_data_2012.py FT53_V21A_AN6_FULL katilp
+          docker run -v $(pwd):/mnt/vol -v /cvmfs:/cvmfs -w /home/cmsusr cmsopendata/cmssw_5_3_32_vnc /bin/bash  /mnt/vol/workflow_test.sh PhysObjectExtractorTool master PhysObjectExtractor/python/poet_cfg_mc_2012.py START53_V27 katilp
           #cp -r /mnt/vol/products outputs
         #upload output file
       - name: Upload artifact
