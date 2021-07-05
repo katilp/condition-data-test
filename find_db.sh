@@ -22,7 +22,8 @@ exception=start
 i=0
 echo In $(pwd)
 echo Going to run $config
-#cat $config
+
+ls -l /opt/cms-cmsopendata-conddb
 
 while [ $exception != no ]
 do
@@ -79,9 +80,9 @@ do
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
-               cp $missingdb /opt/cms-opendata-conddb/$globaltag
+               cp $missingdb /opt/cms-opendata-conddb/$globaltag/
             else   
-               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /opt/cms-opendata-conddb/$globaltag
+               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /opt/cms-opendata-conddb/$globaltag/
             fi
 
             # find the name in the tag tree corresponding to this db number
@@ -128,7 +129,7 @@ do
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
-            cp $dbfile /opt/cms-opendata-condb/
+            cp $dbfile /opt/cms-opendata-conddb/
             #else
             #  echo The file of size $filesize was not copied. The workflow may remain in a loop if it it was really needed. 
             #fi
