@@ -79,9 +79,9 @@ do
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
-               cp $missingdb $globaltag
+               cp $missingdb /cat/cms-opendata-conddb/$globaltag
             else   
-               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
+               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cat/cms-opendata-conddb/$globaltag
             fi
 
             # find the name in the tag tree corresponding to this db number
@@ -94,7 +94,7 @@ do
             newdbline="$(echo "${missingdbline/$dbnumber,/$i,}")"
             newline="$(echo $newdbline)"
             newpath="$(echo "${newline/sqlite_file:./sqlite_file:/opt/cms-opendata-conddb}")"
-            newpathline=$(echo $newpath)"
+            newpathline="$(echo $newpath)"
             sed -i "/CREATE TABLE coral_sqlite_fk/i $newpathline" file_dump.txt
             echo Adding line $newpathline
 
@@ -128,6 +128,7 @@ do
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
+            cp $dbfile /opt/cms-opendata-condb/
             #else
             #  echo The file of size $filesize was not copied. The workflow may remain in a loop if it it was really needed. 
             #fi
@@ -141,9 +142,9 @@ then
     echo "No condition db files needed. Are you sure? Here's the job output again:"
 else  
     echo These db files have been copied:
-    ls $globaltag
+    ls /opt/cms-opendata-condb/$globaltag
 
-    sudo cp -r $globaltag /mnt/vol/outputs
+    sudo cp -r /opt/cms-opendata-condb/$globaltag /mnt/vol/outputs
 
     echo The main db file is:
     cat file_dump.txt
