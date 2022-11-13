@@ -22,7 +22,8 @@ exception=start
 i=0
 echo In $(pwd)
 echo Going to run $config
-#cat $config
+
+ls -l /opt/cms-cmsopendata-conddb
 
 while [ $exception != no ]
 do
@@ -79,9 +80,9 @@ do
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
-               cp $missingdb $globaltag
+               cp $missingdb /opt/cms-opendata-conddb/$globaltag/
             else   
-               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb $globaltag
+               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /opt/cms-opendata-conddb/$globaltag/
             fi
 
             # find the name in the tag tree corresponding to this db number
@@ -93,8 +94,10 @@ do
             # add the missing line and substitute the db number with i (the second substitution is to avoid error sed: -e expression #1, char 34: unknown command: `I')
             newdbline="$(echo "${missingdbline/$dbnumber,/$i,}")"
             newline="$(echo $newdbline)"
-            sed -i "/CREATE TABLE coral_sqlite_fk/i $newline" file_dump.txt
-            echo Adding line $newdbline
+            newpath="$(echo "${newline/sqlite_file:./sqlite_file:/opt/cms-opendata-conddb}")"
+            newpathline="$(echo $newpath)"
+            sed -i "/CREATE TABLE coral_sqlite_fk/i $newpathline" file_dump.txt
+            echo Adding line $newpathline
 
             # change the two numbers for lines All and Calibration to 2*i+2 and 2*i+1
             val1line="$(grep "VALUES(1," file_dump.txt)"
@@ -126,6 +129,7 @@ do
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
+            cp $dbfile /opt/cms-opendata-conddb/
             #else
             #  echo The file of size $filesize was not copied. The workflow may remain in a loop if it it was really needed. 
             #fi
@@ -139,9 +143,9 @@ then
     echo "No condition db files needed. Are you sure? Here's the job output again:"
 else  
     echo These db files have been copied:
-    ls $globaltag
+    ls /opt/cms-opendata-conddb/$globaltag
 
-    sudo cp -r $globaltag /mnt/vol/outputs
+    sudo cp -r /opt/cms-opendata-conddb/$globaltag /mnt/vol/outputs
 
     echo The main db file is:
     cat file_dump.txt
