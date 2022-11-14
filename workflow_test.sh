@@ -2,6 +2,8 @@
 #             $4 GlobalTag $ GitHub organization/owner
 
 sudo chown $USER /mnt/vol
+sudo mkdir -p /cvmfs/cms-opendata-conddb.cern.ch
+sudo chown $USER /cvmfs/cms-opendata-conddb.cern.ch
 sudo chown $USER /opt
 
 #echo Update paths:
@@ -14,7 +16,7 @@ echo git versions:
 which git
 git --version
 
-ls /cvmfs/cms-opendata-conddb.cern.ch
+ls /mountedcvmfs/cms-opendata-conddb.cern.ch
 
 if [ -z "$1" ]; then package=TriggerInfoTool; else package=$1; fi
 if [ -z "$2" ]; then branch=2011; else branch=$2; fi
@@ -30,8 +32,8 @@ git clone -b $branch https://github.com/$gitdir/$package.git
 #git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
-mkdir -p /opt/cms-opendata-conddb/$globaltag
-ls -l /opt/cms-opendata-conddb
+mkdir -p /cvmfs/cms-opendata-conddb/$globaltag
+ls -l /cvmfs/cms-opendata-conddb
 mkdir /mnt/vol/products
 ls -l /mnt/vol
 
