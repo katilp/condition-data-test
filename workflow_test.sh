@@ -31,6 +31,7 @@ git clone -b $branch https://github.com/$gitdir/$package.git
 cd $package/
 scram b
 mkdir -p /opt/cms-opendata-conddb/$globaltag
+ls -l /opt/cms-opendata-conddb
 mkdir /mnt/vol/products
 ls -l /mnt/vol
 
