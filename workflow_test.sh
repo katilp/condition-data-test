@@ -2,8 +2,8 @@
 #             $4 GlobalTag $ GitHub organization/owner
 
 sudo chown $USER /mnt/vol
-sudo mkdir -p /cvmfs/cms-opendata-conddb.cern.ch
-sudo chown $USER /cvmfs/cms-opendata-conddb.cern.ch
+sudo mkdir /cvmfs
+sudo chown $USER /cvmfs
 sudo chown $USER /opt
 
 #echo Update paths:
