@@ -2,6 +2,8 @@
 #             $4 GlobalTag $ GitHub organization/owner
 
 sudo chown $USER /mnt/vol
+sudo mkdir /cvmfs
+sudo chown $USER /cvmfs
 sudo chown $USER /opt
 
 #echo Update paths:
@@ -14,7 +16,7 @@ echo git versions:
 which git
 git --version
 
-ls /cvmfs/cms-opendata-conddb.cern.ch
+ls /mountedcvmfs/cms-opendata-conddb.cern.ch
 
 if [ -z "$1" ]; then package=TriggerInfoTool; else package=$1; fi
 if [ -z "$2" ]; then branch=2011; else branch=$2; fi
@@ -30,8 +32,8 @@ git clone -b $branch https://github.com/$gitdir/$package.git
 #git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
-mkdir -p /opt/cms-opendata-conddb/$globaltag
-ls -l /opt/cms-opendata-conddb
+mkdir -p /cvmfs/cms-opendata-conddb/$globaltag
+ls -l /cvmfs/cms-opendata-conddb
 mkdir /mnt/vol/products
 ls -l /mnt/vol
 
@@ -40,7 +42,7 @@ ls -l /mnt/vol
 cp /mnt/vol/base_dump.txt .
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
-sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
+sqlite3 /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 cp /mnt/vol/find_db.sh .
 chmod +x find_db.sh

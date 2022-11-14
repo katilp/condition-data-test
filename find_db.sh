@@ -2,10 +2,10 @@
 # parameters: $1 package, $2 branch, $3 configuration file with path from package root
 #             $4 GlobalTag 
 # echo pwd `pwd`: /home/cmsusr/CMSSW_5_3_32/src
-# to be run in a container with /cvmfs/cms-opendata-conddb.cern.ch mounted
+# to be run in a container with /cvmfs/cms-opendata-conddb.cern.ch mounted to /mountedcvmfs
 # on host:
 # sudo mount -t cvmfs cms-opendata-conddb.cern.ch /cvmfs/cms-opendata-conddb.cern.ch
-# docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/cvmfs/cms-opendata-conddb.cern.ch" -P -p 5901:5901 cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
+# docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/mountedcvmfs/cms-opendata-conddb.cern.ch" -P -p 5901:5901 cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
 # Set up with prepare.sh
 
 cd ~/CMSSW_5_3_32/src/
@@ -73,14 +73,14 @@ do
         
             # copy the missing db file from cvmfs to the local directory
             # add a protection for large files, if they are over ~GB the GitHub workflow won't be able to handle them, set to 100M here
-            filesize="$(echo "$(ls -Ssr /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb)" | awk -F/ '{print $1}' )"
+            filesize="$(echo "$(ls -Ssr /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb)" | awk -F/ '{print $1}' )"
             if (( $filesize > 200000 ))
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
-               cp $missingdb /opt/cms-opendata-conddb/$globaltag/
+               cp $missingdb /cvmfs/cms-opendata-conddb/$globaltag/
             else   
-               cp /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /opt/cms-opendata-conddb/$globaltag/
+               cp /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
             fi
 
             # find the name in the tag tree corresponding to this db number
@@ -92,7 +92,7 @@ do
             # add the missing line and substitute the db number with i (the second substitution is to avoid error sed: -e expression #1, char 34: unknown command: `I')
             newdbline="$(echo "${missingdbline/$dbnumber,/$i,}")"
             newline="$(echo $newdbline)"
-            newpath="$(echo "${newline/sqlite_file:./sqlite_file:/opt/cms-opendata-conddb}")"
+            newpath="$(echo "${newline/sqlite_file:./sqlite_file:/cvmfs/cms-opendata-conddb}")"
             newpathline="$(echo $newpath)"
             sed -i "/CREATE TABLE coral_sqlite_fk/i $newpathline" file_dump.txt
             echo Adding line $newpathline
@@ -127,7 +127,7 @@ do
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
-            cp $dbfile /opt/cms-opendata-conddb/
+            cp $dbfile /cvmfs/cms-opendata-conddb/
             #else
             #  echo The file of size $filesize was not copied. The workflow may remain in a loop if it it was really needed. 
             #fi
@@ -141,9 +141,9 @@ then
     echo "No condition db files needed. Are you sure? Here's the job output again:"
 else  
     echo These db files have been copied:
-    ls /opt/cms-opendata-conddb/$globaltag
+    ls /cvmfs/cms-opendata-conddb/$globaltag
 
-    sudo cp -r /opt/cms-opendata-conddb/$globaltag /mnt/vol/outputs
+    sudo cp -r /cvmfs/cms-opendata-conddb/$globaltag /mnt/vol/outputs
 
     echo The main db file is:
     cat file_dump.txt
