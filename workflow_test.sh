@@ -1,32 +1,18 @@
-#!/bin/bash -l
 # parameters: $1 package, $2 branch, $3 configuration file with path from package root
 #             $4 GlobalTag $ GitHub organization/owner
-# set -e
 
 sudo chown $USER /mnt/vol
 sudo chown $USER /opt
 
-echo Update paths:
-echo $UPDATE_PATH
-echo $LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=${UPDATE_PATH}/lib:${LD_LIBRARY_PATH}
-export PATH=${UPDATE_PATH}/bin:${PATH}
-echo PATH updated to $PATH
+#echo Update paths:
+#echo $UPDATE_PATH
+#echo $LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=${UPDATE_PATH}/lib:${LD_LIBRARY_PATH}
+#export PATH=${UPDATE_PATH}/bin:${PATH}
+# echo PATH updated to $PATH
 echo git versions:
 which git
 git --version
-echo openssl versions:
-which openssl
-openssl version
-echo Checking /usr/local/bin/git and openssl
-ls -l /usr/local/bin/git*
-ls -l /usr/local/bin/open*
-echo Checking /usr/local/libexec
-ls -l /usr/local/libexec
-echo Checking CMS env
-which cmsRun
-
-
 
 ls /cvmfs/cms-opendata-conddb.cern.ch
 
@@ -39,12 +25,13 @@ if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$5; fi
 dbfile="$globaltag".db
 
 # Set up area 
-echo Cloning with the git protocol for now
-#git clone -b $branch https://github.com/$gitdir/$package.git
-git clone -b $branch git://github.com/$gitdir/$package.git
+echo Cloning with the https protocol
+git clone -b $branch https://github.com/$gitdir/$package.git
+#git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
 scram b
 mkdir -p /opt/cms-opendata-conddb/$globaltag
+ls -l /opt/cms-opendata-conddb
 mkdir /mnt/vol/products
 ls -l /mnt/vol
 
