@@ -2,10 +2,10 @@
 # parameters: $1 package, $2 branch, $3 configuration file with path from package root
 #             $4 GlobalTag 
 # echo pwd `pwd`: /home/cmsusr/CMSSW_5_3_32/src
-# to be run in a container with /cvmfs/cms-opendata-conddb.cern.ch mounted to /cvmfsmounted
+# to be run in a container with /cvmfs/cms-opendata-conddb.cern.ch mounted to /mountedcvmfs
 # on host:
 # sudo mount -t cvmfs cms-opendata-conddb.cern.ch /cvmfs/cms-opendata-conddb.cern.ch
-# docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/cvmfsmounted/cms-opendata-conddb.cern.ch" -P -p 5901:5901 cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
+# docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/mountedcvmfs/cms-opendata-conddb.cern.ch" -P -p 5901:5901 cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
 # Set up with prepare.sh
 
 cd ~/CMSSW_5_3_32/src/
@@ -73,14 +73,14 @@ do
         
             # copy the missing db file from cvmfs to the local directory
             # add a protection for large files, if they are over ~GB the GitHub workflow won't be able to handle them, set to 100M here
-            filesize="$(echo "$(ls -Ssr /cvmfsmounted/cms-opendata-conddb.cern.ch/$globaltag/$missingdb)" | awk -F/ '{print $1}' )"
+            filesize="$(echo "$(ls -Ssr /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb)" | awk -F/ '{print $1}' )"
             if (( $filesize > 200000 ))
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
                cp $missingdb /cvmfs/cms-opendata-conddb/$globaltag/
             else   
-               cp /cvmfsmounted/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
+               cp /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
             fi
 
             # find the name in the tag tree corresponding to this db number
