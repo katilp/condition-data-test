@@ -23,8 +23,6 @@ i=0
 echo In $(pwd)
 echo Going to run $config
 
-ls -l /opt/cms-cmsopendata-conddb
-
 while [ $exception != no ]
 do
     cmsRun $config > full.log 2>&1 
