@@ -25,7 +25,7 @@ if [ -z "$5" ]; then gitdir=cms-opendata-analyses; else gitdir=$5; fi
 dbfile="$globaltag".db
 
 # Set up area 
-echo Cloning with the https protocol for now
+echo Cloning with the https protocol
 git clone -b $branch https://github.com/$gitdir/$package.git
 #git clone -b $branch git://github.com/$gitdir/$package.git
 cd $package/
