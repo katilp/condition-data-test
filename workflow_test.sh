@@ -42,7 +42,7 @@ ls -l /mnt/vol
 cp /mnt/vol/base_dump.txt .
 sed -i 's/replacethis/'$globaltag'/g' base_dump.txt
 cat base_dump.txt | sqlite3 $dbfile
-sqlite3 /cvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
+sqlite3 /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag.db .dump > original.txt
 
 cp /mnt/vol/find_db.sh .
 chmod +x find_db.sh
