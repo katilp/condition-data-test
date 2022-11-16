@@ -21,7 +21,7 @@ jobs:
         run: | 
           docker run -v $(pwd):/mnt/vol -v /cvmfs:/mountedcvmfs -w /home/cmsusr cmsopendata/cmssw_5_3_32-slc6_amd64_gcc472 /bin/bash  /mnt/vol/workflow_test.sh PhysObjectExtractorTool 2011 PhysObjectExtractor/JEC/jec_cfg.py FT_53_LV5_AN1 katilp
           #cp -r /mnt/vol/products outputs
-        #upload output file
+        # upload output file
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
