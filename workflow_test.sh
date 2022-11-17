@@ -56,6 +56,7 @@ chmod +x dbline.py
 
 #comment the label that is missing in 2011 data
 sudo sed -i '/softElectronByPtBJetTags/d' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
+sudo sed -i '/softElectronByIP3dBJetTags/d' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py
 
 # FIXME: make this configurable, if cloning from the original repo's, take a local config with the needed modifications
 if [ $package = TriggerInfoTool ]  && [ $gitdir = cms-opendata-analyses ]; then cp /mnt/vol/trigger_2011_cfg.py $config; fi
