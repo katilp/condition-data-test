@@ -54,6 +54,9 @@ cp /mnt/vol/dbline.py .
 chmod +x dbline.py
 #curl https://raw.githubusercontent.com/katilp/condition-data-test/main/find_db.sh > find_db.sh
 
+#comment the label that is missing in 2011 data
+sudo sed -i '/softElectronByPtBJetTags/d' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
+
 # FIXME: make this configurable, if cloning from the original repo's, take a local config with the needed modifications
 if [ $package = TriggerInfoTool ]  && [ $gitdir = cms-opendata-analyses ]; then cp /mnt/vol/trigger_2011_cfg.py $config; fi
 if [ $package = PhysObjectExtractorTool ] && [ $gitdir = cms-legacydata-analyses ]; then config=/mnt/vol/jec_cfg.py; fi
