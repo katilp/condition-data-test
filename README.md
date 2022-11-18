@@ -20,7 +20,9 @@ Runs a CMSSW job with the condition database area locally. Reads the missing dat
 - $5 GitHub orgainzation/owner - cms-opendata-analyses
 ```
 
-If TriggerInfoTool or PhysObjectExtractor are given as package, a local config with the needed modification for GT settings is used.
+If TriggerInfoTool or PhysObjectExtractor are given as package, a local config with the needed modification for GT settings is used. For POET, configs are taken from a fork with hardcoded data or MC option, the Global Tag connect settings for this test and the PAT option (poet_cfg_data.py and poet_cfg_mc.py) respectively.
+
+For 2011 branch, b-discrimininators defined in PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py are changed to those available in data.
 
 
 
@@ -40,6 +42,8 @@ and that the number of events is small.
 ## GitHub action output
 
 The GitHub action workflow writes he db files (copied from `/cvmfs/cms-opendata-conddb.cern.ch/<global-tag-name>`), updated stripped main db file `<global-tag-name>.db` and the text dump of it are in the artifact.
+
+Due to some instability (input/output errors for reading from `/cvmfs`), the db files are now read from `/eos/opendata/cms/conddb/`. This area contains all OD condition data.
 
 
 ## Output directory
