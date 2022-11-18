@@ -80,7 +80,8 @@ do
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
                cp $missingdb /cvmfs/cms-opendata-conddb/$globaltag/
             else   
-               cp /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
+               # cp /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
+               xrdcp root://eospublic.cern.ch//eos/opendata/cms/conddb/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
             fi
 
             # find the name in the tag tree corresponding to this db number
