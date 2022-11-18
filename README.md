@@ -5,7 +5,7 @@ Script to extract condition database files needed in a CMSSW analysis job from `
 Runs on a CMSSW open data container with cvmfs mounted on host, e.g
 
 ```
-docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/cvmfs/cms-opendata-conddb.cern.ch" cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
+docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/cvmfs/cms-opendata-conddb.cern.ch" cmsopendata/cmssw_5_3_32-slc6_amd64_gcc472:latest /bin/bash
 ```
 
 Runs a CMSSW job with the condition database area locally. Reads the missing database file from the exception message and copies it to the local area. Adds the file information to a main db file. Loops until all needed files dowloaded.
@@ -21,6 +21,8 @@ Runs a CMSSW job with the condition database area locally. Reads the missing dat
 ```
 
 If TriggerInfoTool or PhysObjectExtractor are given as package, a local config with the needed modification for GT settings is used. For POET, configs are taken from a fork with hardcoded data or MC option, the Global Tag connect settings for this test and the PAT option (poet_cfg_data.py and poet_cfg_mc.py) respectively.
+
+POET with PAT jets has the advantage of requiring all trigger and jet/btag related condition dbs. It is not guaranteed that they cover all usecases.
 
 For 2011 branch, b-discrimininators defined in PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py are changed to those available in data.
 
