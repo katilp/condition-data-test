@@ -50,56 +50,11 @@ Due to some instability (input/output errors for reading from `/cvmfs`), the db 
 
 ## Output directory
 
-An example output from TriggerInfoTool is in the output directory. For the trigger info test, the following database files are needed in order to run the job without external database access:
+The output contains the database index for the selected files (with the database file path as `/cvmfs/cms-opendata-conddb.cern.ch`) and the selected database files under a folder with the GT name. 
 
-```
-L1GtPrescaleFactorsAlgoTrig_CRAFT09v2_hlt.db
-L1GtPrescaleFactorsTechTrig_CRAFT09v2_hlt.db
-L1GtStableParameters_CRAFT09_hlt.db
-L1GtTriggerMaskAlgoTrig_CRAFT09v2_hlt.db
-L1GtTriggerMaskTechTrig_CRAFT09v2_hlt.db
-L1GtTriggerMaskVetoAlgoTrig_CRAFT09_hlt.db
-L1GtTriggerMaskVetoTechTrig_CRAFT09v2_hlt.db
-L1GtTriggerMenu_CRAFT09_hlt.db
-```
-The file names are identical for the two years, but the files are not the same:
+The selected databases extracted with this tool have now been copied to `/eos/opendata/cms/conddb/selection-for-containers/cmssw_5_3_32/`.
 
-2011:
-
-```
-$ ls -l FT_53_LV5_AN1
-total 1908
--rw-r--r-- 1 cmsusr cmsusr 598016 Jun 24 21:28 L1GtPrescaleFactorsAlgoTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 266240 Jun 24 21:29 L1GtPrescaleFactorsTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  38912 Jun 24 21:27 L1GtStableParameters_CRAFT09_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 236544 Jun 24 21:30 L1GtTriggerMaskAlgoTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 219136 Jun 24 21:31 L1GtTriggerMaskTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  34816 Jun 24 21:31 L1GtTriggerMaskVetoAlgoTrig_CRAFT09_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 128000 Jun 24 21:32 L1GtTriggerMaskVetoTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 419840 Jun 24 21:33 L1GtTriggerMenu_CRAFT09_hlt.db
-```
-
-
-2012:
-
-```
-$ ls -l FT53_V21A_AN6_FULL
-total 4452
--rw-r--r-- 1 cmsusr cmsusr 1369088 Jun 24 21:04 L1GtPrescaleFactorsAlgoTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  670720 Jun 24 21:05 L1GtPrescaleFactorsTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr   38912 Jun 24 21:03 L1GtStableParameters_CRAFT09_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  627712 Jun 24 21:05 L1GtTriggerMaskAlgoTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  522240 Jun 24 21:06 L1GtTriggerMaskTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr   34816 Jun 24 21:07 L1GtTriggerMaskVetoAlgoTrig_CRAFT09_hlt.db
--rw-r--r-- 1 cmsusr cmsusr  277504 Jun 24 21:07 L1GtTriggerMaskVetoTechTrig_CRAFT09v2_hlt.db
--rw-r--r-- 1 cmsusr cmsusr 1002496 Jun 24 21:08 L1GtTriggerMenu_CRAFT09_hlt.db
-```
-
-The corresponding database dumps are in
-- [trigger_2012_dbfile_dump.txt](output/trigger_2012_dbfile_dump.txt)
-- [trigger_2011_dbfile_dump.txt](output/trigger_2011_dbfile_dump.txt)
-
-The database files can be generated with 
+The output contains a text dump of the index file. It is only for information and not needed for database access. It can be written in the sql format with:
 
 ```
 cat file_dump.txt | sqlite3 tagname.db
