@@ -78,10 +78,10 @@ do
             then
                echo WARNING: the file $missingdb is large $filesize and not copied. The job may fail if it is really needed.
                cat /mnt/vol/db_dummy.txt | sqlite3 $missingdb
-               cp $missingdb /cvmfs/cms-opendata-conddb/$globaltag/
+               cp $missingdb /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/
             else   
-               # cp /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
-               xrdcp root://eospublic.cern.ch//eos/opendata/cms/conddb/$globaltag/$missingdb /cvmfs/cms-opendata-conddb/$globaltag/
+               # cp /mountedcvmfs/cms-opendata-conddb.cern.ch/$globaltag/$missingdb /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/
+               xrdcp root://eospublic.cern.ch//eos/opendata/cms/conddb/$globaltag/$missingdb /cvmfs/cms-opendata-conddb.cern.ch/$globaltag/
             fi
 
             # find the name in the tag tree corresponding to this db number
@@ -93,7 +93,7 @@ do
             # add the missing line and substitute the db number with i (the second substitution is to avoid error sed: -e expression #1, char 34: unknown command: `I')
             newdbline="$(echo "${missingdbline/$dbnumber,/$i,}")"
             newline="$(echo $newdbline)"
-            newpath="$(echo "${newline/sqlite_file:./sqlite_file:/cvmfs/cms-opendata-conddb}")"
+            newpath="$(echo "${newline/sqlite_file:./sqlite_file:/cvmfs/cms-opendata-conddb.cern.ch}")"
             newpathline="$(echo $newpath)"
             sed -i "/CREATE TABLE coral_sqlite_fk/i $newpathline" file_dump.txt
             echo Adding line $newpathline
@@ -128,7 +128,7 @@ do
 
             rm $dbfile
             cat file_dump.txt | sqlite3 $dbfile
-            cp $dbfile /cvmfs/cms-opendata-conddb/
+            cp $dbfile /cvmfs/cms-opendata-conddb.cern.ch/
             #else
             #  echo The file of size $filesize was not copied. The workflow may remain in a loop if it it was really needed. 
             #fi
@@ -142,9 +142,9 @@ then
     echo "No condition db files needed. Are you sure? Here's the job output again:"
 else  
     echo These db files have been copied:
-    ls /cvmfs/cms-opendata-conddb/$globaltag
+    ls /cvmfs/cms-opendata-conddb.cern.ch/$globaltag
 
-    sudo cp -r /cvmfs/cms-opendata-conddb/$globaltag /mnt/vol/outputs
+    sudo cp -r /cvmfs/cms-opendata-conddb.cern.ch/$globaltag /mnt/vol/outputs
 
     echo The main db file is:
     cat file_dump.txt
