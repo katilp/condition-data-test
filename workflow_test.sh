@@ -2,8 +2,9 @@
 #             $4 GlobalTag $ GitHub organization/owner
 
 sudo chown $USER /mnt/vol
-sudo mkdir /cvmfs
+#sudo mkdir /cvmfs
 sudo chown $USER /cvmfs
+sudo rm -rf /cvmfs/cms-opendata-conddb.cern.ch
 sudo chown $USER /opt
 
 #echo Update paths:
@@ -16,7 +17,7 @@ echo git versions:
 which git
 git --version
 
-ls /mountedcvmfs/cms-opendata-conddb.cern.ch
+# ls /mountedcvmfs/cms-opendata-conddb.cern.ch
 
 if [ -z "$1" ]; then package=TriggerInfoTool; else package=$1; fi
 if [ -z "$2" ]; then branch=2011; else branch=$2; fi
@@ -59,12 +60,12 @@ chmod +x dbline.py
 #comment the label that is missing in 2011 data
 if [ $branch = 2011 ]
 then
-  sudo sed -i 's/softElectronByPtBJetTags/softPFElectronBJetTags/g' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py
-  # sudo sed -i '/softElectronByPtBJetTags/d' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
-  sudo sed -i '/softElectronByIP3dBJetTags/d' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py
-  sudo sed -i '/softMuonByPtBJetTags/d' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
-  sudo sed -i '/softMuonByIP3dBJetTags/d' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py
-  sudo sed -i 's/softMuonBJetTags/softPFMuonBJetTags/g' /opt/cms/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
+  sudo sed -i 's/softElectronByPtBJetTags/softPFElectronBJetTags/g' /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py
+  # sudo sed -i '/softElectronByPtBJetTags/d' /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
+  sudo sed -i '/softElectronByIP3dBJetTags/d' /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py
+  sudo sed -i '/softMuonByPtBJetTags/d' /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
+  sudo sed -i '/softMuonByIP3dBJetTags/d' /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py
+  sudo sed -i 's/softMuonBJetTags/softPFMuonBJetTags/g' /cvmfs/cms.cern.ch/slc6_amd64_gcc472/cms/cmssw/CMSSW_5_3_32/src/PhysicsTools/PatAlgos/python/producersLayer1/jetProducer_cfi.py 
 fi
 
 # FIXME: make this configurable, if cloning from the original repo's, take a local config with the needed modifications
