@@ -8,24 +8,33 @@
 # docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/mountedcvmfs/cms-opendata-conddb.cern.ch" -P -p 5901:5901 cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
 # Set up with prepare.sh
 
-cd ~/CMSSW_5_3_32/src/
-source /opt/cms/cmsset_default.sh
+# cd ~/CMSSW_5_3_32/src/
+# source /opt/cms/cmsset_default.sh
 
 if [ -z "$1" ]; then package=TriggerInfoTool; else package=$1; fi
 if [ -z "$2" ]; then branch=2011; else branch=$2; fi
 if [ -z "$3" ]; then config=GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py; else config=$3; fi
 if [ -z "$4" ]; then globaltag=FT_53_LV5_AN1; else globaltag=$4; fi
+if [ -z "$5" ]; then isdata=False; else isdata=$5; fi
+
 dbfile="$globaltag".db
 
 cd $package
+# fix this hack ... this is needed to find the cert file in data/ but if done in this way it does not make sense to pass the config as parameter...
+if [ $package = PhysObjectExtractorTool ]
+then 
+    config=python/poet_cfg.py
+    cd PhysObjectExtractor
+fi
+
 exception=start
 i=0
 echo In $(pwd)
-echo Going to run $config
+echo Going to run $config with isData $isdata
 
 while [ $exception != no ]
 do
-    cmsRun $config > full.log 2>&1 
+    cmsRun $config $isdata > full.log 2>&1 
 
     # find the exception from the cmsRun output
     exceptionmessage="$(awk '/Exception Message:/{flag=1;next}/----- End Fatal Exception /{flag=0}flag' full.log)"
