@@ -20,6 +20,13 @@ if [ -z "$5" ]; then isdata=False; else isdata=$5; fi
 dbfile="$globaltag".db
 
 cd $package
+# fix this hack ... this is needed to find the cert file in data/ but if done in this way it does not make sense to pass the config as parameter...
+if [ $package = PhysObjectExtractorTool ]
+then 
+    config=python/poet_cfg.py
+    cd PhysObjectExtractor
+fi
+
 exception=start
 i=0
 echo In $(pwd)
