@@ -15,17 +15,19 @@ if [ -z "$1" ]; then package=TriggerInfoTool; else package=$1; fi
 if [ -z "$2" ]; then branch=2011; else branch=$2; fi
 if [ -z "$3" ]; then config=GeneralInfoAnalyzer/python/triggerinfoanalyzer_cfg.py; else config=$3; fi
 if [ -z "$4" ]; then globaltag=FT_53_LV5_AN1; else globaltag=$4; fi
+if [ -z "$5" ]; then isdata=False; else isdata=$5; fi
+
 dbfile="$globaltag".db
 
 cd $package
 exception=start
 i=0
 echo In $(pwd)
-echo Going to run $config
+echo Going to run $config with isData $isdata
 
 while [ $exception != no ]
 do
-    cmsRun $config > full.log 2>&1 
+    cmsRun $config $isdata > full.log 2>&1 
 
     # find the exception from the cmsRun output
     exceptionmessage="$(awk '/Exception Message:/{flag=1;next}/----- End Fatal Exception /{flag=0}flag' full.log)"
