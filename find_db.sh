@@ -8,8 +8,8 @@
 # docker run -it --name my_cvmfs --volume "/cvmfs/cms-opendata-conddb.cern.ch:/mountedcvmfs/cms-opendata-conddb.cern.ch" -P -p 5901:5901 cmsopendata/cmssw_5_3_32_vnc:latest /bin/bash
 # Set up with prepare.sh
 
-cd ~/CMSSW_5_3_32/src/
-source /opt/cms/cmsset_default.sh
+# cd ~/CMSSW_5_3_32/src/
+# source /opt/cms/cmsset_default.sh
 
 if [ -z "$1" ]; then package=TriggerInfoTool; else package=$1; fi
 if [ -z "$2" ]; then branch=2011; else branch=$2; fi
